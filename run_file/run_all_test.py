@@ -21,5 +21,4 @@ if __name__ =='__main__':
                             description="运行环境：Python")
     runner.run(discover)
     fp.close()
-    # time.sleep(3)
     send_mail(1,report_file)
