@@ -6,7 +6,7 @@ import configparser
 读取配置文件的数据
 """
 
-configPath =("../config.ini")
+configPath =("./config.ini")
 class ReadConfig:
     def __init__(self):
         fd = open(configPath)
