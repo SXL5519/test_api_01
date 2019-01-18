@@ -144,22 +144,22 @@ class DB:
         self.db.close()
         print("Database closed!")
 
-if __name__ == "__main__":
-    a=DB()
-    ba=a.connect_mongodb_all('tb_order',[{'$match': {'$and': [{'payTime': {'$gte': datetime.strptime('2019-01-16 00:00:00','%Y-%m-%d %H:%M:%S')}},
-                            {'payTime': {'$lte': datetime.strptime('2019-01-16 23:59:59','%Y-%m-%d %H:%M:%S')}}]}},
-                            {'$group': {'_id': '销售总额', 'total': {'$sum': '$totalPrice'}}}])
-    c=0
-    for i in ba:
-        c=float(str(i.get('total')))##销售总额
-    bb=a.connect_mongodb_all('tb_return_apply',[{'$match':{'$and':[{"statusList.status":"FINISHED"},
-                            {"statusList.time":{'$gte':datetime.strptime('2019-01-16 00:00:00','%Y-%m-%d %H:%M:%S')}},
-                            {"statusList.time":{'$lte':datetime.strptime('2019-01-16 23:59:59','%Y-%m-%d %H:%M:%S')}}]}},
-                            {'$group':{'_id':'退款总金额','total':{'$sum':'$confirmMoney'}}}])
-    cc=0
-    for j in bb:
-        cc = float(str(j.get('total')))  ##退款总金额
-    print('销售金额%.2f'%(c-cc))
+# if __name__ == "__main__":
+#     a=DB()
+#     ba=a.connect_mongodb_all('tb_order',[{'$match': {'$and': [{'payTime': {'$gte': datetime.strptime('2019-01-16 00:00:00','%Y-%m-%d %H:%M:%S')}},
+#                             {'payTime': {'$lte': datetime.strptime('2019-01-16 23:59:59','%Y-%m-%d %H:%M:%S')}}]}},
+#                             {'$group': {'_id': '销售总额', 'total': {'$sum': '$totalPrice'}}}])
+#     c=0
+#     for i in ba:
+#         c=float(str(i.get('total')))##销售总额
+#     bb=a.connect_mongodb_all('tb_return_apply',[{'$match':{'$and':[{"statusList.status":"FINISHED"},
+#                             {"statusList.time":{'$gte':datetime.strptime('2019-01-16 00:00:00','%Y-%m-%d %H:%M:%S')}},
+#                             {"statusList.time":{'$lte':datetime.strptime('2019-01-16 23:59:59','%Y-%m-%d %H:%M:%S')}}]}},
+#                             {'$group':{'_id':'退款总金额','total':{'$sum':'$confirmMoney'}}}])
+#     cc=0
+#     for j in bb:
+#         cc = float(str(j.get('total')))  ##退款总金额
+#     print('销售金额%.2f'%(c-cc))
 ##################################################################################################################################
     # bc = a.connect_mongodb_all('tb_return_apply', [{'$match': {'$and': [{"statusList.status": "FINISHED"},
     #                                                                     {"statusList.time": {'$gte': datetime.strptime(
