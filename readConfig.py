@@ -9,7 +9,7 @@ import sys
 读取配置文件的数据
 """
 path=os.path.split(sys.path[0])[0]
-print(path)
+# print(path)
 configPath =(path+"/config.ini")
 # configPath =("../config.ini")  ###本地运行
 class ReadConfig:
