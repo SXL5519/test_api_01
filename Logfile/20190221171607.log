@@ -1,0 +1,5 @@
+Thu, 21 Feb 2019 17:16:07 function.py[line:21] DEBUG debug message
+Thu, 21 Feb 2019 17:16:07 function.py[line:22] INFO info message
+Thu, 21 Feb 2019 17:16:07 function.py[line:23] WARNING warning message
+Thu, 21 Feb 2019 17:16:07 function.py[line:24] ERROR error message
+Thu, 21 Feb 2019 17:16:07 function.py[line:25] CRITICAL critical message
