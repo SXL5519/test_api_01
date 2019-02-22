@@ -2,11 +2,16 @@
 import os
 import codecs
 import configparser
+
+import sys
+
 """
 读取配置文件的数据
 """
-
-configPath =("../config.ini")
+path=os.path.split(sys.path[0])[0]
+print(path)
+configPath =(path+"/config.ini")
+# configPath =("../config.ini")  ###本地运行
 class ReadConfig:
     def __init__(self):
         fd = open(configPath)
