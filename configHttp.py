@@ -19,14 +19,6 @@ class ConfigHttp:
         host = localReadConfig.get_http("baseurl")
         port = localReadConfig.get_http("port")
         timeout = float(localReadConfig.get_http("timeout"))
-        ###将字符串转化成字典
-        # headers = ast.literal_eval(localReadConfig.get_http("headers"))
-        # self.params = {}
-        # self.data = {}
-        # # self.data = json.dumps({})
-        # self.url = None
-        # self.files = {}
-        # self.headers={}
         self.case_name=case.get('case_name')
         self.method=case.get('method')
         self.url=case.get('url')

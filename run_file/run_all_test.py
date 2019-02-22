@@ -11,7 +11,7 @@ discover = unittest.defaultTestLoader.discover(case_dir,pattern)
 
 
 if __name__ =='__main__':
-    logfile()
+    # logfile()
     #日期格式化
     times = time.strftime("%Y%m%d%H%M%S")
     report_file="../report/"+times+"-testresult.html"

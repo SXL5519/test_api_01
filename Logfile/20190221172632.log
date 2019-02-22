@@ -1,0 +1,11 @@
+Thu, 21 Feb 2019 17:26:32 function.py[line:21] DEBUG debug message
+Thu, 21 Feb 2019 17:26:32 function.py[line:22] INFO info message
+Thu, 21 Feb 2019 17:26:32 function.py[line:23] WARNING warning message
+Thu, 21 Feb 2019 17:26:32 function.py[line:24] ERROR error message
+Thu, 21 Feb 2019 17:26:32 function.py[line:25] CRITICAL critical message
+Thu, 21 Feb 2019 17:26:32 connectionpool.py[line:813] DEBUG Starting new HTTPS connection (1): zuultest.godteam.net:443
+Thu, 21 Feb 2019 17:26:32 connectionpool.py[line:393] DEBUG https://zuultest.godteam.net:443 "POST /ajgsapp/user/logi HTTP/1.1" 200 None
+Thu, 21 Feb 2019 17:26:32 connectionpool.py[line:813] DEBUG Starting new HTTPS connection (1): zuultest.godteam.net:443
+Thu, 21 Feb 2019 17:26:32 connectionpool.py[line:393] DEBUG https://zuultest.godteam.net:443 "POST /ajgsapp/user/login HTTP/1.1" 200 None
+Thu, 21 Feb 2019 17:26:32 connectionpool.py[line:813] DEBUG Starting new HTTPS connection (1): zuultest.godteam.net:443
+Thu, 21 Feb 2019 17:26:32 connectionpool.py[line:393] DEBUG https://zuultest.godteam.net:443 "POST /ajgsapp/myCenter/index HTTP/1.1" 200 None
