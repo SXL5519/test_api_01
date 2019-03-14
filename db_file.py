@@ -32,23 +32,25 @@ class DB:
         # self.db = None
         # self.cursor = None
 
-    def connect_mongodb_all(self,table,n=None):
+    def connect_mongodb_all(self,table,type,n=None):
         """
         查询mongoDB数据
         :param table: 表名
         :param n: 查询条件
         :return:
         """
-        i=0
-        client = MongoClient(host=host,port=port)
+        value=''
+        client = MongoClient(host=host, port=port)
         db = client[database]
         # print(db)
         collection = db[table]
-        # print(collection)
-        print(n)
-        # value=collection.find_one(n)
-        value=collection.aggregate(n)
-
+        print('sql：'+n)
+        if type == 1:
+            value = collection.find_one(n)
+        elif type == 2:
+            value = collection.aggregate(n)
+        elif type == 3:
+            value = collection.find(n).count()
         # print(value)
         client.close()
         return value
