@@ -63,10 +63,12 @@ class ConfigHttp:
         :param n:n=1时返回正则匹配全部数据
         :return:
         """
-        if keys['keys'] != 'aid':
-            re_str = re.compile('"' + r + '":"(.*?)"')
-        else:
+        if keys['keys'] == 'adrId':
             re_str = re.compile(',{"' + r + '":"(.*?)","province"')
+        elif keys['keys']=='merchanttypeId':
+            re_str = re.compile('{"' + r + '":"(.*?)","name"')
+        else:
+            re_str = re.compile('"' + r + '":"(.*?)"')
         if len(re_str.findall(data))!=0:
             if n==1:
                 a = re_str.findall(data)
@@ -75,6 +77,7 @@ class ConfigHttp:
                 a = re_str.findall(data)[i]
         else:
             a='null'
+        # print(re_str.findall(data))
         return a
 
     def req(self,method,url,header,data):
