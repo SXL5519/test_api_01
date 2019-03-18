@@ -81,21 +81,33 @@ class ConfigHttp:
             return a
         elif isinstance(r,tuple):
             list_1 = []
+            dict_1={}
             data = json.loads(data)
             data_1 = data
             for a in r:
                 if isinstance(data_1, list):
                     for s in range(len(data_1)):
-                        if type(data_1[s][a])==int:
+                        if 'keys' in kwargs and kwargs['keys'] == 'userbankId' and a==r[len(r)-1]:
+                            if data_1[s]['bank']=='':
+                                dict_1['ali-bankId']=data_1[s][a]
+                            else:
+                                dict_1['bank-bankId']=data_1[s][a]
+
+                        elif type(data_1[s][a])==int:
                             list_1 += self.set_list(str(data_1[s][a]))
                         else:
                             list_1 += self.set_list(data_1[s][a])
-                    data_1 = list_1
-                    list_1 = []
+                    if 'keys' in kwargs and kwargs['keys'] == 'userbankId':
+                        list_1 += self.set_list(dict_1)
+                        data_1 = list_1
+                    else:
+                        data_1 = list_1
+                        list_1 = []
                 elif isinstance(data_1, dict):
                     data_1 = data_1[a]
             if 'n' in kwargs:
                 if kwargs['n']== 1 :
+                    print(data_1)
                     pass
             else:
                 k = random.randint(0, len(data_1) - 1)
@@ -145,6 +157,9 @@ class ConfigHttp:
         """
         a=[]
         if type(data)==str:
+            a.append(data)
+            return a
+        elif isinstance(data,dict):
             a.append(data)
             return a
         else:
