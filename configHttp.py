@@ -55,7 +55,7 @@ class ConfigHttp:
         else:
             return d
 
-    def find_update_data(self,r,data,*n,**keys):
+    def find_update_data(self,r,data,**kwargs):
         """
         例：匹配 "token":"8b63876034ab4a22bbbd4c28a1d74399"
         :param r:匹配以什么开头的字符串
@@ -63,22 +63,71 @@ class ConfigHttp:
         :param n:n=1时返回正则匹配全部数据
         :return:
         """
-        if keys['keys'] == 'adrId':
-            re_str = re.compile(',{"' + r + '":"(.*?)","province"')
-        elif keys['keys']=='merchanttypeId':
-            re_str = re.compile('{"' + r + '":"(.*?)","name"')
-        else:
-            re_str = re.compile('"' + r + '":"(.*?)"')
-        if len(re_str.findall(data))!=0:
-            if n==1:
-                a = re_str.findall(data)
+        re_str=''
+        if isinstance(r,str):
+            if 'keys' in kwargs and kwargs['keys'] == 'adrId':
+                re_str = re.compile(',{"' + r + '":"(.*?)","province"')
             else:
-                i = random.randint(0, len(re_str.findall(data)) - 1)
-                a = re_str.findall(data)[i]
-        else:
-            a='null'
-        # print(re_str.findall(data))
-        return a
+                re_str = re.compile('"' + r + '":"(.*?)"')
+            if len(re_str.findall(data))!=0:
+                if 'n' in kwargs:
+                    if kwargs['n']==1:
+                        a = re_str.findall(data)
+                else:
+                    i = random.randint(0, len(re_str.findall(data)) - 1)
+                    a = re_str.findall(data)[i]
+            else:
+                a='null'
+            return a
+        elif isinstance(r,tuple):
+            list_1 = []
+            data = json.loads(data)
+            data_1 = data
+            for a in r:
+                if isinstance(data_1, list):
+                    for s in range(len(data_1)):
+                        if type(data_1[s][a])==int:
+                            list_1 += self.set_list(str(data_1[s][a]))
+                        else:
+                            list_1 += self.set_list(data_1[s][a])
+                    data_1 = list_1
+                    list_1 = []
+                elif isinstance(data_1, dict):
+                    data_1 = data_1[a]
+            if 'n' in kwargs:
+                if kwargs['n']== 1 :
+                    pass
+            else:
+                k = random.randint(0, len(data_1) - 1)
+                data_1 = data_1[k]
+            return data_1
+
+
+    def find_update_data_01(self,r,data,*n):
+        """
+        以json格式匹配
+        例：匹配 "token":"8b63876034ab4a22bbbd4c28a1d74399"
+        :param r:需要匹配的json格式key值（元组）
+        :param data: 匹配的数据
+        :param n:n=1时返回匹配全部数据
+        :return:
+        """
+        list_1=[]
+        data=json.loads(data)
+        data_1=data
+        for a in r:
+            if isinstance(data_1,list):
+                for s in range(len(data_1)):
+                    list_1+=self.set_list(data_1[s][a])
+                data_1=list_1
+                list_1=[]
+            elif isinstance(data_1,dict):
+                data_1=data_1[a]
+        if n[0]==1:
+            k=random.randint(0,len(data_1) - 1)
+            data_1 = data_1[k]
+        return data_1
+
 
     def req(self,method,url,header,data):
         if method=='post':

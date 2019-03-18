@@ -59,7 +59,7 @@ class AA(MyTest):
                             self.goods.append(case.set_list(case.find_update_data(i_one[0], r.text,keys=0)))
                             self.dicts[i_one[1]] = self.goods
                         if i_one[1]=='merchanttypeId':
-                            self.dicts[i_one[1]] = case.find_update_data(i_one[0], r.text, keys='merchanttypeId')
+                            self.dicts[i_one[1]] = case.find_update_data(i_one[0],r.text)
                         else:
                             self.dicts[i_one[1]]=case.find_update_data(i_one[0],r.text,keys=0)
             elif case.update_data_Fields[0]=='1':
