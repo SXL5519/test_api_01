@@ -31,9 +31,16 @@ class AA(MyTest):
         url=case.set_url(case.url)
         print('接口地址：'+url)
         print('请求方式：'+case.method)
-        if case.header!='null':
-            header = ast.literal_eval(case.headers)
-            header['Authorization']=self.dicts['tokenID']
+        if case.header!='null' and case.header!='':
+            case.header=ast.literal_eval(case.header)
+            if case.header['keys']==1:
+                header = ast.literal_eval(case.headers)
+                header['Authorization']=self.dicts['tokenID']
+            elif case.header['keys']==2:
+                header = ast.literal_eval(case.headers)
+                header['Authorization'] = self.dicts['sign_in_tokenID']
+            else:
+                header=''
         else:
             header=''
         print('请求头：'+str(header))
@@ -156,6 +163,19 @@ class AA(MyTest):
                         data[i_one[1]] = self.dicts[i_one[0][0]][0][list_1[j]]
                     else:
                         data[i_one[1]]='null'
+                print('请求参数:' + str(data))
+                r = case.req(case.method, url, header, data)
+            elif case.update_data_Fields[0] =='5':
+                data = case.set_data(case.data)
+                for i in case.update_data_Fields[1:]:
+                    i_one = tuple(eval(i))
+                    if i_one[0]=='telephone':
+                        tel=''
+                        # list_2=[1,2,3,4,5,6,7,8,9,0]
+                        for i in range(8):
+                            tel+=str(random.randint(0,9))
+                        data[i_one[0]]='188'+tel
+                        self.dicts[i_one[1]]=data[i_one[0]]
                 print('请求参数:' + str(data))
                 r = case.req(case.method, url, header, data)
         else:
