@@ -150,7 +150,11 @@ class AA(MyTest):
                 if i_one[0][0] == 'userbankId':
                     data[i_one[1]] = self.dicts[i_one[0][0]][0][i_one[0][1]]
             else:
-                if i_one[0] == 'goodsId' and i_one[1] != 'skuId':
+                if i_one[0]=='goodsId' and i_one[1]=='goods':
+                    ast.literal_eval(data[i_one[1]])[0]['goodsId']=self.dicts[i_one[0]][self.dicts['nu']][0]
+                    ast.literal_eval(data[i_one[1]])[0]['goodsSku']=self.dicts[i_one[0]][self.dicts['nu']][1]
+
+                elif i_one[0] == 'goodsId' and i_one[1] != 'skuId':
                     j = random.randint(0, len(self.dicts['goodsId']) - 1)
                     data[i_one[1]] = self.dicts[i_one[0]][j][0]
                 elif i_one[0] == 'goodsId' and i_one[1] == 'skuId':
