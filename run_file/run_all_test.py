@@ -13,6 +13,7 @@ from HTMLTestRunner_PY3 import HTMLTestRunner
 from function import send_mail,screen_shot,logfile
 case_dir = "test_case"
 pattern="*cases.py"
+# pattern="*case_01.py"
 discover = unittest.defaultTestLoader.discover(case_dir,pattern)
 
 
