@@ -3,6 +3,7 @@
 配置接口请求方法
 """
 import ssl
+# 禁用掉服务器证书
 ssl._create_default_https_context = ssl._create_unverified_context
 import ast
 import random
